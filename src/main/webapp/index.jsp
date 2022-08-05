@@ -1,13 +1,22 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <meta charset="UTF-8">
+    <title>Hastatus</title>
+    <script>
+        let socket = new WebSocket("ws://localhost:8080/demo_war/teste");
+
+        socket.onmessage = function(event) {
+            console.log("Recebeu do servidor:"+event.data);
+        }
+    </script>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<p>HASTATUS</p>
+<p>v-1.10.10.0</p>
+
+<button onclick="socket.send(JSON.stringify({mensagem:'Opa!'}));">Enviar mensagem</button>
+<button onclick="socket.close();">Fechar socket</button>
+
 </body>
 </html>
